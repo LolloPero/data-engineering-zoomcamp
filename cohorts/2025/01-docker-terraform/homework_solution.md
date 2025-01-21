@@ -25,6 +25,17 @@ What's the version of `pip` in the image?
 
 ## Question 2. Understanding Docker networking and docker-compose
 
+*Solution:*
+
+```
+docker-compose up
+```
+Connect to localhost:8080
+
+Setup pgadmin to connect to hostname=postgres and port=5432.
+pgadmin runs within the same network as postgres container, hence it should access the container internal port(5432).
+
+
 Given the following `docker-compose.yaml`, what is the `hostname` and `port` that **pgadmin** should use to connect to the postgres database?
 
 ```yaml
