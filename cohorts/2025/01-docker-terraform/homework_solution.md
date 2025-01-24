@@ -3,15 +3,6 @@
 
 ## Question 1. Understanding docker first run 
 
-*Command for solution:*
-
-```
-lorper@Lorenzos-Laptop data-engineering-zoomcamp % docker run -it --entrypoint bash python:3.12.8
-root@41be242dc414:/# pip --version
-pip 24.3.1 from /usr/local/lib/python3.12/site-packages/pip (python 3.12)
-```
-
-
 Run docker with the `python:3.12.8` image in an interactive mode, use the entrypoint `bash`.
 
 What's the version of `pip` in the image?
@@ -21,20 +12,16 @@ What's the version of `pip` in the image?
 - 23.3.1
 - 23.2.1
 
-
-
-## Question 2. Understanding Docker networking and docker-compose
-
 *Solution:*
 
 ```
-docker-compose up
+lorper@Lorenzos-Laptop data-engineering-zoomcamp % docker run -it --entrypoint bash python:3.12.8
+root@41be242dc414:/# pip --version
+pip 24.3.1 from /usr/local/lib/python3.12/site-packages/pip (python 3.12)
 ```
-Connect to localhost:8080
 
-Setup pgadmin to connect to hostname=postgres and port=5432.
-pgadmin runs within the same network as postgres container, hence it should access the container internal port(5432).
 
+## Question 2. Understanding Docker networking and docker-compose
 
 Given the following `docker-compose.yaml`, what is the `hostname` and `port` that **pgadmin** should use to connect to the postgres database?
 
@@ -78,6 +65,18 @@ volumes:
 
 If there are more than one answers, select only one of them
 
+
+*Solution:*
+postgres:5432
+
+```
+docker-compose up
+```
+Connect to localhost:8080
+
+Setup pgadmin to connect to hostname=postgres and port=5432.
+pgadmin runs within the same network as postgres container, hence it should access the container internal port(5432).
+
 ##  Prepare Postgres
 
 Run Postgres and load data as shown in the videos
@@ -116,6 +115,68 @@ Answers:
 - 104,838;  199,013;  109,645;  27,688;  35,202
 
 
+*Solution:*
+Sequennce is: 104802; 198924; 109603; 27678; 35189
+1. Up to 1 mile
+```
+SELECT count(*)
+FROM public.green_taxi_data
+WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
+		    lpep_dropoff_datetime < '2019-11-01' AND
+		    trip_distance <= 1
+---------
+"count"
+104802
+```
+2. In between 1 (exclusive) and 3 miles (inclusive),
+```
+SELECT count(*)
+FROM public.green_taxi_data
+WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
+		    lpep_dropoff_datetime < '2019-11-01' AND
+		    trip_distance >  1 AND
+        trip_distance <= 3
+---------
+"count"
+198924
+```
+3. In between 3 (exclusive) and 7 miles (inclusive),
+```
+SELECT count(*)
+FROM public.green_taxi_data
+WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
+		    lpep_dropoff_datetime < '2019-11-01' AND
+		    trip_distance >  3 AND
+        trip_distance <= 7
+---------
+"count"
+109603
+```
+4. In between 7 (exclusive) and 10 miles (inclusive),
+```
+SELECT count(*)
+FROM public.green_taxi_data
+WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
+		    lpep_dropoff_datetime < '2019-11-01' AND
+		    trip_distance <= 1
+---------
+"count"
+27678
+```
+5. Over 10 miles 
+```
+SELECT count(*)
+FROM public.green_taxi_data
+WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
+		    lpep_dropoff_datetime < '2019-11-01' AND
+		    trip_distance > 10
+---------
+"count"
+35189
+```
+
+
+
 ## Question 4. Longest trip for each day
 
 Which was the pick up day with the longest trip distance?
@@ -128,6 +189,15 @@ Tip: For every day, we only care about one single trip with the longest distance
 - 2019-10-26
 - 2019-10-31
 
+
+```
+SELECT 	lpep_pickup_datetime,
+		    trip_distance
+FROM public.green_taxi_data
+ORDER BY trip_distance DESC
+```
+"lpep_pickup_datetime"	"trip_distance"
+"2019-10-31 23:23:41"	   515.89
 
 ## Question 5. Three biggest pickup zones
 
