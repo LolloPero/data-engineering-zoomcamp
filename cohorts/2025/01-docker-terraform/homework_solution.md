@@ -189,7 +189,7 @@ Tip: For every day, we only care about one single trip with the longest distance
 - 2019-10-26
 - 2019-10-31
 
-
+*Solution:*
 ```
 SELECT 	lpep_pickup_datetime,
 		    trip_distance
@@ -212,6 +212,32 @@ Consider only `lpep_pickup_datetime` when filtering by date.
 - Bedford, East Harlem North, Astoria Park
 
 
+*Solution:*
+```
+SELECT 	CAST(gtd.lpep_pickup_datetime AS DATE) pickup_date,
+		ROUND(CAST(SUM(gtd.total_amount) AS BIGINT),1) total_amount,
+		z."Zone"
+FROM 
+	public.green_taxi_data gtd
+	JOIN 
+	public.zones z
+	ON gtd."PULocationID" = z."LocationID"
+GROUP BY
+	pickup_date,"Zone"
+HAVING ROUND(CAST(SUM(gtd.total_amount) AS BIGINT),1) > 13000 AND
+		CAST(gtd.lpep_pickup_datetime AS DATE) = '2019-10-18'
+ORDER BY pickup_date, total_amount DESC
+
+-----------------
+"pickup_date"	"total_amount"	"Zone"
+"2019-10-18"	18687.0	"East Harle m North"
+"2019-10-18"	16797.0	"East Harlem South"
+"2019-10-18"	13030.0	"Morningside Heights"
+
+```
+
+
+
 ## Question 6. Largest tip
 
 For the passengers picked up in October 2019 in the zone
@@ -227,6 +253,30 @@ We need the name of the zone, not the ID.
 - East Harlem North
 - East Harlem South
 
+
+*Solution:*
+```
+SELECT 	TO_CHAR(t.lpep_pickup_datetime, 'YYYY-MM') pickup_month,
+		t.tip_amount,
+		zpu."Zone" pickup_zone,
+		zdo."Zone" dropoff_zone
+FROM 
+	public.green_taxi_data t,
+	public.zones zpu,
+	public.zones zdo
+WHERE
+	t."PULocationID" = zpu."LocationID" AND
+	t."DOLocationID" = zdo."LocationID" AND
+	TO_CHAR(t.lpep_pickup_datetime, 'YYYY-MM') = '2019-10' AND
+	zpu."Zone" = 'East Harlem North'
+ORDER BY
+	tip_amount DESC
+
+--------
+"pickup_month"	"tip_amount"	"pickup_zone"	"dropoff_zone"
+"2019-10"	87.3	"East Harlem North"	"JFK Airport"
+
+```
 
 ## Terraform
 
@@ -253,6 +303,10 @@ Answers:
 - terraform init, terraform apply -auto-approve, terraform destroy
 - terraform import, terraform apply -y, terraform rm
 
+*Solution:*
+ - `terraform init` (download provider plugins)
+ - `terraform apply -auto-approve` (Generates proposed changes)
+ - `terraform destroy` (Removes all resources)
 
 ## Submitting the solutions
 
