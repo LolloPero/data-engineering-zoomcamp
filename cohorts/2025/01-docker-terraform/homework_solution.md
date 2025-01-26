@@ -12,7 +12,7 @@ What's the version of `pip` in the image?
 - 23.3.1
 - 23.2.1
 
-*Solution:*
+**SOLUTION:**
 
 ```
 lorper@Lorenzos-Laptop data-engineering-zoomcamp % docker run -it --entrypoint bash python:3.12.8
@@ -66,17 +66,20 @@ volumes:
 If there are more than one answers, select only one of them
 
 
-*Solution:*
+**SOLUTION:**
+```
 postgres:5432
+```
+*explanation:*
 
 ```
 docker-compose up
-```
+
 Connect to localhost:8080
 
 Setup pgadmin to connect to hostname=postgres and port=5432.
-pgadmin runs within the same network as postgres container, hence it should access the container internal port(5432).
-
+Pgadmin runs within the same network as postgres container, hence it should access the container internal port(5432).
+```
 ##  Prepare Postgres
 
 Run Postgres and load data as shown in the videos
@@ -115,62 +118,82 @@ Answers:
 - 104,838;  199,013;  109,645;  27,688;  35,202
 
 
-*Solution:*
-Sequennce is: 104802; 198924; 109603; 27678; 35189
+**SOLUTION:**
+```
+Sequence is: 104802; 198924; 109603; 27678; 35189
+```
+
+*SQL code for solution:*
+
 1. Up to 1 mile
 ```
-SELECT count(*)
-FROM public.green_taxi_data
-WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
-		    lpep_dropoff_datetime < '2019-11-01' AND
-		    trip_distance <= 1
----------
+SELECT
+	count(*)
+FROM
+	public.green_taxi_data
+WHERE
+	lpep_pickup_datetime >= '2019-10-01' AND
+	lpep_dropoff_datetime < '2019-11-01' AND
+	trip_distance <= 1
+-------------------------------------------------
 "count"
 104802
 ```
 2. In between 1 (exclusive) and 3 miles (inclusive),
 ```
-SELECT count(*)
-FROM public.green_taxi_data
-WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
-		    lpep_dropoff_datetime < '2019-11-01' AND
-		    trip_distance >  1 AND
+SELECT
+	count(*)
+FROM
+	public.green_taxi_data
+WHERE
+	lpep_pickup_datetime >= '2019-10-01' AND
+	lpep_dropoff_datetime < '2019-11-01' AND
+	trip_distance >  1 AND
         trip_distance <= 3
----------
+-------------------------------------------------
 "count"
 198924
 ```
 3. In between 3 (exclusive) and 7 miles (inclusive),
 ```
-SELECT count(*)
-FROM public.green_taxi_data
-WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
-		    lpep_dropoff_datetime < '2019-11-01' AND
-		    trip_distance >  3 AND
+SELECT
+	count(*)
+FROM
+	public.green_taxi_data
+WHERE
+	lpep_pickup_datetime >= '2019-10-01' AND
+	lpep_dropoff_datetime < '2019-11-01' AND
+	trip_distance  > 3 AND
         trip_distance <= 7
----------
+-------------------------------------------------
 "count"
 109603
 ```
 4. In between 7 (exclusive) and 10 miles (inclusive),
 ```
-SELECT count(*)
-FROM public.green_taxi_data
-WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
-		    lpep_dropoff_datetime < '2019-11-01' AND
-		    trip_distance <= 1
----------
+SELECT
+	count(*)
+FROM
+	public.green_taxi_data
+WHERE
+	lpep_pickup_datetime >= '2019-10-01' AND
+	lpep_dropoff_datetime < '2019-11-01' AND
+	trip_distance <= 1
+-------------------------------------------------
 "count"
 27678
 ```
 5. Over 10 miles 
 ```
-SELECT count(*)
-FROM public.green_taxi_data
-WHERE 	lpep_pickup_datetime >= '2019-10-01' AND
-		    lpep_dropoff_datetime < '2019-11-01' AND
-		    trip_distance > 10
----------
+SELECT
+	count(*)
+FROM
+	public.green_taxi_data
+WHERE
+	lpep_pickup_datetime >= '2019-10-01' AND
+	lpep_dropoff_datetime < '2019-11-01' AND
+	trip_distance > 10
+-------------------------------------------------
 "count"
 35189
 ```
@@ -189,15 +212,20 @@ Tip: For every day, we only care about one single trip with the longest distance
 - 2019-10-26
 - 2019-10-31
 
-*Solution:*
+**SOLUTION:**
 ```
-SELECT 	lpep_pickup_datetime,
-		    trip_distance
-FROM public.green_taxi_data
-ORDER BY trip_distance DESC
-```
+SELECT
+	lpep_pickup_datetime,
+	trip_distance
+FROM
+	public.green_taxi_data
+ORDER BY
+	trip_distance DESC
+---------------------------------
 "lpep_pickup_datetime"	"trip_distance"
 "2019-10-31 23:23:41"	   515.89
+```
+
 
 ## Question 5. Three biggest pickup zones
 
@@ -212,23 +240,28 @@ Consider only `lpep_pickup_datetime` when filtering by date.
 - Bedford, East Harlem North, Astoria Park
 
 
-*Solution:*
+**SOLUTION:**
 ```
-SELECT 	CAST(gtd.lpep_pickup_datetime AS DATE) pickup_date,
-		ROUND(CAST(SUM(gtd.total_amount) AS BIGINT),1) total_amount,
-		z."Zone"
+SELECT
+	CAST(gtd.lpep_pickup_datetime AS DATE) pickup_date,
+	ROUND(CAST(SUM(gtd.total_amount) AS BIGINT),1) total_amount,
+	z."Zone"
 FROM 
 	public.green_taxi_data gtd
 	JOIN 
 	public.zones z
 	ON gtd."PULocationID" = z."LocationID"
 GROUP BY
-	pickup_date,"Zone"
-HAVING ROUND(CAST(SUM(gtd.total_amount) AS BIGINT),1) > 13000 AND
-		CAST(gtd.lpep_pickup_datetime AS DATE) = '2019-10-18'
-ORDER BY pickup_date, total_amount DESC
+	pickup_date,
+	"Zone"
+HAVING
+	ROUND(CAST(SUM(gtd.total_amount) AS BIGINT),1) > 13000 AND
+	CAST(gtd.lpep_pickup_datetime AS DATE) = '2019-10-18'
+ORDER BY
+	pickup_date,
+	total_amount DESC
 
------------------
+-------------------------------------------------
 "pickup_date"	"total_amount"	"Zone"
 "2019-10-18"	18687.0	"East Harle m North"
 "2019-10-18"	16797.0	"East Harlem South"
@@ -254,12 +287,13 @@ We need the name of the zone, not the ID.
 - East Harlem South
 
 
-*Solution:*
+**SOLUTION:**
 ```
-SELECT 	TO_CHAR(t.lpep_pickup_datetime, 'YYYY-MM') pickup_month,
-		t.tip_amount,
-		zpu."Zone" pickup_zone,
-		zdo."Zone" dropoff_zone
+SELECT
+	TO_CHAR(t.lpep_pickup_datetime, 'YYYY-MM') pickup_month,
+	t.tip_amount,
+	zpu."Zone" pickup_zone,
+	zdo."Zone" dropoff_zone
 FROM 
 	public.green_taxi_data t,
 	public.zones zpu,
@@ -272,7 +306,7 @@ WHERE
 ORDER BY
 	tip_amount DESC
 
---------
+-------------------------------------------------
 "pickup_month"	"tip_amount"	"pickup_zone"	"dropoff_zone"
 "2019-10"	87.3	"East Harlem North"	"JFK Airport"
 
@@ -303,11 +337,12 @@ Answers:
 - terraform init, terraform apply -auto-approve, terraform destroy
 - terraform import, terraform apply -y, terraform rm
 
-*Solution:*
+**SOLUTION:**
+```
  - `terraform init` (download provider plugins)
  - `terraform apply -auto-approve` (Generates proposed changes)
  - `terraform destroy` (Removes all resources)
-
+```
 ## Submitting the solutions
 
 * Form for submitting: https://courses.datatalks.club/de-zoomcamp-2025/homework/hw1
