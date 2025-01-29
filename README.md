@@ -8,3 +8,7 @@ This repository documents my experience with the DataTalksClub Zoomcamp data eng
 ### 01-docker-terraform
 - [module 1 - repo with code](https://github.com/LolloPero/data-engineering-zoomcamp/tree/homeworks/cohorts/2025/01-docker-terraform)
 - [module 1 - homework with solution](https://github.com/LolloPero/data-engineering-zoomcamp/blob/homeworks/cohorts/2025/01-docker-terraform/homework_solution.md)
+
+### 02-workflow-orchestration
+- [module 2 - repo with code](https://github.com/LolloPero/data-engineering-zoomcamp/tree/homeworks/cohorts/2025/02-workflow-orchestration)
+- [module 2 - homework with solution](https://github.com/LolloPero/data-engineering-zoomcamp/blob/homeworks/cohorts/2025/02-workflow-orchestration/homework_solution.md)
