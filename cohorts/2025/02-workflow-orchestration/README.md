@@ -1,4 +1,4 @@
-# 01-docker-terraform - Homework
+# 02-workflow-orchestration - Homework
 This folder contains:
 - **homework.md** : the original homework
 - **homework_solution.md** : homework with solutions
