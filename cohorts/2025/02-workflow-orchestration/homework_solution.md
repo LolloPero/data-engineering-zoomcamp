@@ -33,8 +33,9 @@ Complete the Quiz shown below. It’s a set of 6 multiple-choice questions to te
 - 692.6 MB
 
 **SOLUTION:**
+```
 128.3 MB
-
+```
 2) What is the value of the variable `file` when the inputs `taxi` is set to `green`, `year` is set to `2020`, and `month` is set to `04` during execution?
 - `{{inputs.taxi}}_tripdata_{{inputs.year}}-{{inputs.month}}.csv` 
 - `green_tripdata_2020-04.csv`
@@ -42,8 +43,9 @@ Complete the Quiz shown below. It’s a set of 6 multiple-choice questions to te
 - `green_tripdata_2020.csv`
 
 **SOLUTION:**
+```
 green_tripdata_2020-04.csv
-
+```
 3) How many rows are there for the `Yellow` Taxi data for the year 2020?
 - 13,537.299
 - 24,648,499
@@ -51,6 +53,7 @@ green_tripdata_2020-04.csv
 - 29,430,127
 
 **SOLUTION:**
+
 ```
 SELECT
 	count(1)
@@ -69,6 +72,7 @@ WHERE
 - 1,342,034
 
 **SOLUTION:**
+
 ```
 SELECT
 	count(1)
@@ -87,6 +91,7 @@ WHERE
 - 2,561,031
 
 **SOLUTION:**
+
 ```
 SELECT
 	count(1)
@@ -105,6 +110,7 @@ WHERE
 - Add a `location` property set to `New_York` in the `Schedule` trigger configuration  
 
 **SOLUTION:**
+
 ```
 Kestra uses Java's ZoneId for timezone handling. 
 
