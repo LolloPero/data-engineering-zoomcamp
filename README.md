@@ -12,3 +12,7 @@ This repository documents my experience with the DataTalksClub Zoomcamp data eng
 ### 02-workflow-orchestration
 - [module 2 - repo with code](https://github.com/LolloPero/data-engineering-zoomcamp/tree/homeworks/cohorts/2025/02-workflow-orchestration)
 - [module 2 - homework with solution](https://github.com/LolloPero/data-engineering-zoomcamp/blob/homeworks/cohorts/2025/02-workflow-orchestration/homework_solution.md)
+
+### 03-data-warehouse
+- [module 3 - repo with code](https://github.com/LolloPero/data-engineering-zoomcamp/tree/homeworks/cohorts/2025/03-data-warehouse)
+- [module 3 - homework with solution](https://github.com/LolloPero/data-engineering-zoomcamp/blob/homeworks/cohorts/2025/03-data-warehouse/homework_solution.md)
