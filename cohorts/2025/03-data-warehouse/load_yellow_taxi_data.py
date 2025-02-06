@@ -6,10 +6,10 @@ import time
 
 
 #Change this to your bucket name
-BUCKET_NAME = "dezoomcamp_hw3_2025"  
+BUCKET_NAME = "kestra-de-zoomcap-bucket"  
 
 #If you authenticated through the GCP SDK you can comment out these two lines
-CREDENTIALS_FILE = "gcs.json"  
+CREDENTIALS_FILE = "/Users/lorper/Applications/github/data-engineering-zoomcamp/02-workflow-orchestration/keys/banded-lexicon-449417-v6-44439876b39a.json"  
 client = storage.Client.from_service_account_json(CREDENTIALS_FILE)
 
 
