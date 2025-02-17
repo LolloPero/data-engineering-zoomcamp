@@ -7,9 +7,6 @@ Try running the following commands:
 - dbt test
 
 
-<<<<<<< HEAD
-### Resources:
-=======
 ![image](https://user-images.githubusercontent.com/4315804/152691312-e71b56a4-53ff-4884-859c-c9090dbd0db8.png)
 
 
@@ -28,7 +25,6 @@ _Alternative: use `$ dbt build` to execute with one command the 3 steps above to
 6. View the documentation for the project, this step should open the documentation page on a webserver, but it can also be accessed from  http://localhost:8080 : `$ dbt docs serve`
 
 ### dbt resources:
->>>>>>> main
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
 - Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
 - Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
