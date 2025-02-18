@@ -16,3 +16,7 @@ This repository documents my experience with the DataTalksClub Zoomcamp data eng
 ### 03-data-warehouse
 - [module 3 - repo with code](https://github.com/LolloPero/data-engineering-zoomcamp/tree/homeworks/cohorts/2025/03-data-warehouse)
 - [module 3 - homework with solution](https://github.com/LolloPero/data-engineering-zoomcamp/blob/homeworks/cohorts/2025/03-data-warehouse/homework_solution.md)
+
+### 04-analytics-engineering
+- [module 4 - repo with code](https://github.com/LolloPero/data-engineering-zoomcamp/tree/homeworks/04-analytics-engineering)
+- [module 4 - homework with solution](https://github.com/LolloPero/data-engineering-zoomcamp/blob/homeworks/cohorts/2025/04-analytics-engineering/homework_solution.md)
