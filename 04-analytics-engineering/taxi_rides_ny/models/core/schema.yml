@@ -127,3 +127,11 @@ models:
       - name: payment_type_description
         data_type: string
         description: ""
+
+  - name: dim_taxi_trips
+    description: >
+      Adding year,month,quarter variables for easy filtering
+
+  - name: fct_taxi_trips_quarterly_revenue
+    description: >
+      Computing quarterly revenue and YoY quarterly revenue frowth
