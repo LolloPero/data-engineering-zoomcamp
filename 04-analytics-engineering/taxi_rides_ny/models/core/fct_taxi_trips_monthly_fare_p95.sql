@@ -10,13 +10,12 @@ select
     year,
     month,
     fare_amount,
-    round(
-            percent_rank() over (
+    floor(
+        percent_rank() over (
             partition by service_type, year, month 
             order by fare_amount
-        ),
-        2
-        ) as percentile
+        ) * 100 
+    ) / 100 as percentile
 from {{ ref('dim_taxi_trips') }}
 where 
     fare_amount > 0
