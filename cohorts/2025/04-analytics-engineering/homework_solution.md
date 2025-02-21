@@ -191,7 +191,7 @@ Now, what are the values of `p97`, `p95`, `p90` for Green Taxi and Yellow Taxi, 
 
 **SOLUTION:**
 ```
-
+- green: {p97: 40.0, p95: 33.0, p90: 24.5}, yellow: {p97: 52.0, p95: 37.0, p90: 25.5}
 ```
 ### Question 7: Top #Nth longest P90 travel time Location for FHV
 
@@ -215,7 +215,12 @@ For the Trips that **respectively** started from `Newark Airport`, `SoHo`, and `
 
 **SOLUTION:**
 ```
-
+select DISTINCT *
+FROM `banded-lexicon-449417-v6.dbt_lperino.fct_fhv_monthly_zone_traveltime_p90`
+WHERE year = 2019 AND month = 11 AND pickup_zone in ("Newark Airport", "SoHo","Yorkville East")
+ORDER BY pickup_zone, p90_trip_duration DESC
+-----------------------------------------
+- East Village, Chinatown, Garment District
 ```
 ## Submitting the solutions
 
