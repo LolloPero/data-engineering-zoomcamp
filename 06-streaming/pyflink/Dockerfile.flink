@@ -5,7 +5,7 @@ FROM --platform=linux/amd64 flink:1.16.0-scala_2.12-java8
 
 # ref: https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/deployment/resource-providers/standalone/docker/#using-flink-python-on-docker
 
-RUN apt-get update -y && \
+RUN set -x apt-get update -y && \
     apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libffi-dev liblzma-dev && \
     wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz && \
     tar -xvf Python-3.7.9.tgz && \
